@@ -14,9 +14,10 @@ import AuthLayout from '@/layouts/auth-layout';
 export default function ForgotPassword({ status }: { status?: string }) {
     return (
         <AuthLayout
-            title="Forgot password"
-            description="Enter your email to receive a password reset link"
+            title="¿No recuerdas tu contraseña?"
+            description="Introduce tu correo y te mandaremos un link para reestablecerla"
         >
+        <div className="h-60 bg-slate-950 p-6 rounded-lg shadow-lg max-w-md w-full">
             <Head title="Forgot password" />
 
             {status && (
@@ -30,7 +31,7 @@ export default function ForgotPassword({ status }: { status?: string }) {
                     {({ processing, errors }) => (
                         <>
                             <div className="grid gap-2">
-                                <Label htmlFor="email">Email address</Label>
+                                <Label htmlFor="email">Correo electrónico</Label>
                                 <Input
                                     id="email"
                                     type="email"
@@ -52,16 +53,17 @@ export default function ForgotPassword({ status }: { status?: string }) {
                                     {processing && (
                                         <LoaderCircle className="h-4 w-4 animate-spin" />
                                     )}
-                                    Email password reset link
+                                    Enviar link a mi correo
                                 </Button>
                             </div>
                         </>
                     )}
                 </Form>
+                </div>
 
                 <div className="space-x-1 text-center text-sm text-muted-foreground">
-                    <span>Or, return to</span>
-                    <TextLink href={login()}>log in</TextLink>
+                    <span>Ya me acordé</span>
+                    <TextLink href={login()}>iniciar sesión</TextLink>
                 </div>
             </div>
         </AuthLayout>

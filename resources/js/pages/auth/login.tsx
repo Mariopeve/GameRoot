@@ -10,6 +10,7 @@ import { register } from '@/routes';
 import { store } from '@/routes/login';
 import { request } from '@/routes/password';
 import { Form, Head } from '@inertiajs/react';
+import { Link } from '@inertiajs/react';
 
 interface LoginProps {
     status?: string;
@@ -24,10 +25,19 @@ export default function Login({
 }: LoginProps) {
     return (
         <AuthLayout
-            title="Log in to your account"
-            description="Enter your email and password below to log in"
+            title="Entra en nuestro mundo"
+            description="Introduce tu correo y contraseña para iniciar sesión"
         >
-            <Head title="Log in" />
+
+        <Link
+            href="/"
+            className="fixed bottom-6 right-28 z-40 bg-teal-600 hover:bg-teal-500 text-white text-sm px-4 py-2 rounded-full shadow-lg transition"
+        >
+            Volver a la tienda
+        </Link>
+        
+        <div className="h-100 bg-slate-950 p-6 rounded-lg shadow-lg max-w-md w-full">
+            <Head title="Iniciar sesión" />
 
             <Form
                 {...store.form()}
@@ -38,7 +48,7 @@ export default function Login({
                     <>
                         <div className="grid gap-6">
                             <div className="grid gap-2">
-                                <Label htmlFor="email">Email address</Label>
+                                <Label htmlFor="email">Correo electrónico</Label>
                                 <Input
                                     id="email"
                                     type="email"
@@ -54,14 +64,14 @@ export default function Login({
 
                             <div className="grid gap-2">
                                 <div className="flex items-center">
-                                    <Label htmlFor="password">Password</Label>
+                                    <Label htmlFor="password">Contraseña</Label>
                                     {canResetPassword && (
                                         <TextLink
                                             href={request()}
                                             className="ml-auto text-sm"
                                             tabIndex={5}
                                         >
-                                            Forgot password?
+                                            ¿No recuerdas tu contraseña?
                                         </TextLink>
                                     )}
                                 </div>
@@ -72,7 +82,7 @@ export default function Login({
                                     required
                                     tabIndex={2}
                                     autoComplete="current-password"
-                                    placeholder="Password"
+                                    placeholder="Contraseña"
                                 />
                                 <InputError message={errors.password} />
                             </div>
@@ -83,7 +93,7 @@ export default function Login({
                                     name="remember"
                                     tabIndex={3}
                                 />
-                                <Label htmlFor="remember">Remember me</Label>
+                                <Label htmlFor="remember">Guarda mi sesión</Label>
                             </div>
 
                             <Button
@@ -94,21 +104,22 @@ export default function Login({
                                 data-test="login-button"
                             >
                                 {processing && <Spinner />}
-                                Log in
+                                Iniciar sesión
                             </Button>
                         </div>
 
                         {canRegister && (
                             <div className="text-center text-sm text-muted-foreground">
-                                Don't have an account?{' '}
+                                ¿No eres un afortunado?{' '}
                                 <TextLink href={register()} tabIndex={5}>
-                                    Sign up
+                                     Regístrate
                                 </TextLink>
                             </div>
                         )}
                     </>
                 )}
             </Form>
+            </div>
 
             {status && (
                 <div className="mb-4 text-center text-sm font-medium text-green-600">
